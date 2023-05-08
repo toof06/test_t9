@@ -12,7 +12,7 @@ php 8.0.^ <br>
 # Installations 
 
 ```
-git clone https://github.com/toof06/test_bosh.git
+git clone https://github.com/toof06/test_t9.git
 ```
 
 ```
