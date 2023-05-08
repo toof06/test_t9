@@ -16,7 +16,7 @@ git clone https://github.com/toof06/test_bosh.git
 ```
 
 ```
-cd test_bosh
+cd test_t9
 ```
 
 ```
