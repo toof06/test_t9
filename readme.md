@@ -27,6 +27,7 @@ composer install
 edit the file db/DatabaseConnection.php with your database informations the default are "localhost"; username ="root"; password = "";
 
 ```
+```
 php -S localhost:7000 -d "error_reporting=E_ALL && E_STRICT"
 ```
 
