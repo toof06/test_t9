@@ -1,4 +1,4 @@
-# A simple application search contacts in telephone directory giving first_name or last_name as T9 model <br>
+# A simple application search contacts in telephone directory first_name or last_name begin with the letters derived from the giving numbers as T9 model <br>
 
 
 

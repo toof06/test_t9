@@ -21,11 +21,11 @@ trait T9 {
 
 
     /**
-     * this function get searching entriers and transform them to an array 
+     * this function get searching entriers and transform them to an array of character
      * @param $search is a string with posted numbers 
      * @return array 
      */
-    public function possibilites(string $search) : array 
+    public function getInput(string $search) : array 
     {
         //get inputs numbers 
         $input = str_split($search);
@@ -34,33 +34,34 @@ trait T9 {
         $array_t9 = $this->t9();
 
         //initizialisation of array 
-        $possibilities = [];
+        $inputs = [];
         foreach($input as $char ) 
         {
-            //store searching possibilities inside array 
-            $possibilities[]= $array_t9[$char];
+            //store searching inputs inside array 
+            $inputs[]= $array_t9[$char];
             
         }
-        return $possibilities;
+        return $inputs;
     }
 
     /**
      * make a combinations between arrays 
-     * @param $possibilities is an array containing a searching letters 
+     * @param $array contain a searching letters character  
      * @return array
      */
-    public function Combinations($possibilities, $i = 0, $result = []) {
-        if (!isset($possibilities[$i])) {
+    public function Combinations($array, $i = 0, $result = []) 
+    {
+        if (!isset($array[$i])) {
             return $result;
         }
         if (empty($result)) {
-            foreach ($possibilities[$i] as $element) {
+            foreach ($array[$i] as $element) {
                 $result[] = [$element];
             }
         } else {
             $tmp = [];
-            foreach ($result as &$prev) {
-                foreach ($possibilities[$i] as $element) {
+            foreach ($result as $prev) {
+                foreach ($array[$i] as $element) {
                     $prev[] = $element;
                     $tmp[] = $prev;
                     array_pop($prev);
@@ -68,22 +69,31 @@ trait T9 {
             }
             $result = $tmp;
         }
-        return $this->Combinations($possibilities, $i + 1, $result);
+        return $this->Combinations($array, $i + 1, $result);
     }
     
     /**
      * get all combinations for searching data 
      * @param $post is searching entries 
-     * @return string our query with all searching data combinations  
+     * @return array of combinations  
      */
     public function getCombinations($posts)
     {
         //get combinations 
-        $combinations = $this->combinations($this->possibilites($posts));
+        $combinations = $this->combinations($this->getInput($posts));
+        
+        return $combinations;
 
+    }
+    /**
+     * get SQL statement 
+     * @return string
+     */
+    public function getSqlStatement($posts) 
+    {
         $result=[];
         $query ="SELECT * FROM contact WHERE first_name LIKE ";
-        
+        $combinations = $this->getCombinations($posts);
         //get all result words in an array
         foreach($combinations as $combination) {
             

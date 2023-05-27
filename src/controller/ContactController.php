@@ -33,7 +33,7 @@ class ContactController {
             
             } else {
                 $db = DatabaseConnection::getInstance()->getConnection();
-                $sql = $this->getCombinations($posts);
+                $sql = $this->getSqlStatement($posts);
                 $result = $db->query($sql);
                 return $result->fetchAll();          
             }
